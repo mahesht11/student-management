@@ -29,4 +29,14 @@ public class StudentController {
     public ResponseEntity<List<StudentDto>> getStudents(){
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.FOUND);
     }
+
+    @GetMapping("/get/{studentId}")
+    public ResponseEntity<StudentDto> getStudent(@PathVariable Integer studentId){
+        return new ResponseEntity<>(studentService.getStudent(studentId), HttpStatus.FOUND);
+    }
+
+    @DeleteMapping("/delete/{studentId}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Integer studentId){
+        return new ResponseEntity<>(studentService.deleteStudent(studentId), HttpStatus.FOUND);
+    }
 }
