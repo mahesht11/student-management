@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class StudentServiceImpl {
             return studentDto;
         }
         else {
-            throw new StudentException("Invalid Student id");
+            throw new StudentException("Invalid Student id", HttpStatus.NOT_FOUND.value());
         }
     }
 
@@ -78,7 +79,7 @@ public class StudentServiceImpl {
             return "Successfully deleted";
         }
         else {
-            throw new StudentException("Invalid Student Id");
+            throw new StudentException("Invalid Student Id", HttpStatus.NOT_FOUND.value());
         }
     }
 }
