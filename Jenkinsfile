@@ -23,6 +23,13 @@ pipeline {
         bat "mvn package -f student-management"
         }
     }
+    stage('Sonarqube'){
+        steps{
+            withSoanrQubeEnv('sonar 1.0') {
+            sh "mvn sonar:sonar"
+            }
+        }
+    }
     }
 
 }
