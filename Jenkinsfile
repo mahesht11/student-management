@@ -18,13 +18,19 @@ pipeline {
         bat "mvn test -f student-management"
         }
     }
-        stage('Sonarqube'){
-        steps{
-            withSoanrQubeEnv('sonar 1.0') {
-            sh "mvn sonar:sonar"
-            }
+ stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
     }
+}
     stage('package'){
     steps{
         bat "mvn package -f student-management"
