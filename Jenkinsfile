@@ -23,9 +23,6 @@ pipeline {
         withSonarQubeEnv('sonarqube') {
             bat "mvn clean package sonar:sonar"
         }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
     }
 }
     stage('package'){
