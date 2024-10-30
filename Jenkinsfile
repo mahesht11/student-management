@@ -18,18 +18,19 @@ pipeline {
         bat "mvn test -f student-management"
         }
     }
-    stage('package'){
-    steps{
-        bat "mvn package -f student-management"
-        }
-    }
-    stage('Sonarqube'){
+        stage('Sonarqube'){
         steps{
             withSoanrQubeEnv('sonar 1.0') {
             sh "mvn sonar:sonar"
             }
         }
     }
+    stage('package'){
+    steps{
+        bat "mvn package -f student-management"
+        }
+    }
+
     }
 
 }
